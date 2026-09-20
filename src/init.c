@@ -95,6 +95,7 @@ int main(int argc, char *argv[]) {
     }
 
     printf("init: reaping children\n");
+    spawn("/ram/bin/sh", "sh");
     for (;;) {
         int st = 0;
         int r = (int)__do_syscall_ret(
