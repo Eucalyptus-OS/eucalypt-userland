@@ -7,7 +7,7 @@ AR      := $(CROSS)-ar
 CFLAGS  := -O2 -ffreestanding -fno-stack-protector -fno-stack-check \
            -fno-asynchronous-unwind-tables -mno-red-zone -m64 -mcmodel=small -Wall -Wextra
 
-MLIBC := $(abspath ../eucalypt-distro/build-distro/mlibc-dest/usr/local)
+MLIBC := $(abspath ../eucalypt-distro/eucalypt-mlibc/build/install/src/usr/local)
 MLIBC_INC := $(MLIBC)/include
 MLIBC_LIB := $(MLIBC)/lib
 
