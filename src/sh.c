@@ -1,12 +1,3 @@
-/*
- * sh.c - TinyKern small POSIX shell
- *
- * Plain cooked-mode line input (the kernel tty provides echo + editing),
- * pipes, redirection, background jobs, word expansion, and builtins.
- *
- * mlibc's tiny_kern port lacks Tcgetattr/Tcsetattr/waitpid sysdeps, so
- * those three go straight to the kernel (see k_* helpers below).
- */
 
 #include <ctype.h>
 #include <errno.h>
@@ -1113,7 +1104,7 @@ int main(int argc, char **argv) {
         shell_ignore_signals();
         tm_cooked();
         shell_pgid = (int)getpgrp();
-        printf("TinyKern sh\n");
+        printf("Eucalypt sh\n");
     } else {
         set_handler(SIGPIPE, SIG_IGN);
     }
