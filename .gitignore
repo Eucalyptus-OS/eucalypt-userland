@@ -55,3 +55,4 @@ dkms.conf
 *.dwo
 
 src/bin
+src/usr
