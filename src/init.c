@@ -17,10 +17,15 @@ static void report(const char *name, int ok) {
     printf("init: %s %s\n", name, ok ? "OK" : "FAIL");
 }
 
-static void spawn(const char *path, const char *name) {
+static void spawn(const char *path, const char *name, const char *arg) {
     pid_t pid = fork();
     if (pid == 0) {
-        char *const argv[] = { (char *)name, NULL };
+        char *argv[3];
+        int i = 0;
+        argv[i++] = (char *)name;
+        if (arg)
+            argv[i++] = (char *)arg;
+        argv[i] = NULL;
         char *const envp[] = { NULL };
         execve(path, argv, envp);
         printf("init: execve(%s) failed: %s\n", path, strerror(errno));
@@ -94,8 +99,10 @@ int main(int argc, char *argv[]) {
         report("open/fstat", 0);
     }
 
-    printf("init: reaping children\n");
-    spawn("/ram/bin/sh", "sh");
+printf("init: reaping children\n");
+    spawn("/ram/bin/sh", "sh", NULL);
+    spawn("/ram/bin/evdev_test", "evdev_test", NULL);
+    spawn("/ram/bin/evdev_test", "evdev_test", "/dev/event1");
     for (;;) {
         int st = 0;
         int r = (int)__do_syscall_ret(
